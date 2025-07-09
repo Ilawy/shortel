@@ -1,0 +1,25 @@
+{
+  "folders": [
+	{
+		"path": "packages/backend"
+	},
+	{
+		"path": "packages/frontend"
+	},
+	{
+		"path": "packages/shared"
+	}
+],
+"settings": {
+	"folder-color.pathColors": [
+		{
+			"folderPath": "backend/",
+			"badge": "B"
+		},
+		{
+			"folderPath": "/mnt/SHARED/projects/url-shortener/packages/frontend/",
+			"badge": "👽"
+		}
+	]
+}
+}

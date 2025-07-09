@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@plugin "daisyui";
+
+
+body {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,90 @@
+<div class="flex flex-1 bg-gray-200">
+  <!-- <aside class="bg-yellow-200">hello world</aside> -->
+  <!-- Main Content -->
+  <main class="flex flex-1 p-4">
+    <div
+      class="container mx-auto flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"
+    >
+      <!-- Sidebar -->
+      <aside class="w-full md:w-64 flex-shrink-0">
+        <div class="bg-base-100 p-4 rounded-lg shadow-md">
+          <h2 class="text-lg font-semibold mb-4">Filters</h2>
+          <div class="space-y-2">
+            <select class="select select-bordered w-full">
+              <option disabled selected>Filter by Category</option>
+              <option>Category 1</option>
+              <option>Category 2</option>
+            </select>
+            <select class="select select-bordered w-full">
+              <option disabled selected>Filter by Status</option>
+              <option>Status 1</option>
+              <option>Status 2</option>
+            </select>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Summary Metrics -->
+        <div class="bg-base-100 p-4 rounded-lg shadow-md">
+          <h2 class="text-lg font-semibold mb-4">Summary Metrics</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="stat">
+              <div class="stat-title">Total Users</div>
+              <div class="stat-value">1,200</div>
+            </div>
+            <div class="stat">
+              <div class="stat-title">Revenue</div>
+              <div class="stat-value">$5,400</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 1 -->
+        <div class="bg-base-100 p-4 rounded-lg shadow-md">
+          <h2 class="text-lg font-semibold mb-4">Chart 1</h2>
+          <div class="h-48 bg-gray-200 flex items-center justify-center">
+            Chart Placeholder
+          </div>
+        </div>
+
+        <!-- Chart 2 -->
+        <div class="bg-base-100 p-4 rounded-lg shadow-md">
+          <h2 class="text-lg font-semibold mb-4">Chart 2</h2>
+          <div class="h-48 bg-gray-200 flex items-center justify-center">
+            Chart Placeholder
+          </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="bg-base-100 p-4 rounded-lg shadow-md">
+          <h2 class="text-lg font-semibold mb-4">Data Table</h2>
+          <div class="overflow-x-auto">
+            <table class="table w-full">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Item 1</td>
+                  <td>Active</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Item 2</td>
+                  <td>Inactive</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

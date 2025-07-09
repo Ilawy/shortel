@@ -1,0 +1,120 @@
+<div class="hero bg-base-200 flex-1">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    @if (route.snapshot.fragment !== "register") {
+      <div class="text-center lg:text-left flex-1">
+        <h1 class="text-5xl font-bold">Welcome back!</h1>
+        <div class="w-128"></div>
+      </div>
+      <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="card-body">
+          <fieldset class="fieldset">
+            <label class="label">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="input"
+              placeholder="Email"
+            />
+            @if (
+              loginForm.get("email")?.invalid && loginForm.get("email")?.touched
+            ) {
+              <div class="text-red-500">Email is required</div>
+            }
+            <label class="label">Password</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="input"
+              placeholder="Password"
+            />
+            @if (
+              loginForm.get("password")?.invalid &&
+              loginForm.get("password")?.touched
+            ) {
+              <div class="text-red-500">Password is required</div>
+            }
+            <div><a class="link link-hover">Forgot password?</a></div>
+            <button class="btn btn-neutral mt-4">Login</button>
+            <p>
+              new to Shortel?
+              <button (click)="setFragment('register')" class="link link-hover">
+                Register
+              </button>
+            </p>
+          </fieldset>
+        </form>
+      </div>
+    } @else {
+      <div class="text-center lg:text-left flex-1">
+        <h1 class="text-5xl font-bold">Hello there</h1>
+        <div class="w-96"></div>
+      </div>
+      <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <form
+          [formGroup]="registerForm"
+          (ngSubmit)="onRegister()"
+          class="card-body"
+        >
+          <fieldset class="fieldset">
+            <label class="label">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="input"
+              placeholder="Email"
+            />
+            @if (
+              registerForm.get("email")?.invalid &&
+              registerForm.get("email")?.touched
+            ) {
+              <div class="text-red-500">Email is required</div>
+            }
+            <label class="label">Password</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="input"
+              placeholder="Password"
+            />
+            @if (
+              registerForm.get("password")?.invalid &&
+              registerForm.get("password")?.touched
+            ) {
+              <div class="text-red-500">
+                Password must be at least 8 characters
+              </div>
+            }
+            <label class="label">Password Confirmation</label>
+            <input
+              formControlName="confirmPassword"
+              type="password"
+              class="input"
+              placeholder="Password Confirmation"
+            />
+            @if (
+              registerForm.get("confirmPassword")?.invalid &&
+              registerForm.get("confirmPassword")?.touched
+            ) {
+              <div class="text-red-500">Password confirmation is required</div>
+            }
+            @if (registerForm.hasError("passwordMismatch")) {
+              <div class="text-red-500">Passwords do not match</div>
+            }
+            <button
+              [disabled]="!registerForm.valid"
+              class="btn btn-neutral mt-4"
+            >
+              Register
+            </button>
+            <p>
+              Already a user?
+              <button (click)="setFragment('login')" class="link link-hover">
+                Login
+              </button>
+            </p>
+          </fieldset>
+        </form>
+      </div>
+    }
+  </div>
+</div>
