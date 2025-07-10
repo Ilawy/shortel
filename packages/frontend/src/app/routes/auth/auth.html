@@ -6,6 +6,13 @@
         <div class="w-128"></div>
       </div>
       <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        @if (formError()) {
+          <div role="alert" class="alert alert-error m-3">
+            <span>{{ formError() }}</span>
+          </div>
+
+          <p></p>
+        }
         <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="card-body">
           <fieldset class="fieldset">
             <label class="label">Email</label>
@@ -15,11 +22,25 @@
               class="input"
               placeholder="Email"
             />
-            @if (
-              loginForm.get("email")?.invalid && loginForm.get("email")?.touched
-            ) {
-              <div class="text-red-500">Email is required</div>
-            }
+            <div
+              class="text-red-500"
+              *ngIf="
+                this.loginForm.controls['email'].hasError('required') &&
+                this.loginForm.controls['email'].touched
+              "
+            >
+              Email is required
+            </div>
+            <div
+              class="text-red-500"
+              *ngIf="
+                this.loginForm.controls['email'].hasError('email') &&
+                this.loginForm.controls['email'].touched
+              "
+            >
+              Email is invalid
+            </div>
+
             <label class="label">Password</label>
             <input
               formControlName="password"
@@ -27,12 +48,15 @@
               class="input"
               placeholder="Password"
             />
-            @if (
-              loginForm.get("password")?.invalid &&
-              loginForm.get("password")?.touched
-            ) {
-              <div class="text-red-500">Password is required</div>
-            }
+            <div
+              class="text-red-500"
+              *ngIf="
+                this.loginForm.controls['password'].hasError('required') &&
+                this.loginForm.controls['password'].touched
+              "
+            >
+              Password is required
+            </div>
             <div><a class="link link-hover">Forgot password?</a></div>
             <button class="btn btn-neutral mt-4">Login</button>
             <p>

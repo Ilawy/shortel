@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, DoCheck, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,13 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { catchError, lastValueFrom, of } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.html',
   styleUrls: ['./auth.css'],
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
 })
 export class Auth {
   route: ActivatedRoute = inject(ActivatedRoute);
@@ -23,13 +25,18 @@ export class Auth {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
+  formError = signal<string | null>(null);
   setFragment(fragment: string) {
+    this.formError.set(null);
     this.router.navigate(this.route.snapshot.url, {
       fragment: fragment,
     });
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -55,13 +62,18 @@ export class Auth {
 
   onLogin(): void {
     if (this.loginForm.valid) {
-      this.http
-        .post('/api/auth/login', this.loginForm.value)
+      this.auth
+        .login(this.loginForm.value)
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            this.formError.set(error.error.message);
+            return of(null);
+          }),
+        )
         .subscribe((result) => {
           console.log(result);
         });
       // Call API to login
-      console.log(this.loginForm.value);
     } else {
       console.log('Invalid form');
     }

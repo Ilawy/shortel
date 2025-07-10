@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import RegisterDto from './register.dto';
 import LoginDto from './login.dto';
 import { Auth } from './auth.decorator';
@@ -8,8 +15,10 @@ export class AuthController {
   @Post('login')
   login(@Body() body: LoginDto) {
     console.log(body);
-
-    return 'Login';
+    throw new HttpException(
+      'Email or password is incorrect',
+      HttpStatus.UNAUTHORIZED,
+    );
   }
 
   @Post('register')

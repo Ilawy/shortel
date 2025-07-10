@@ -21,8 +21,12 @@
   </div>
   <div class="flex gap-3 items-center">
     <a routerLink="/"> home </a>
-    <a routerLink="/dashboard"> dashboard </a>
-    <a routerLink="/"> login </a>
+    @if (!auth.loading() && auth.me()) {
+      <a routerLink="/dashboard"> dashboard </a>
+    }
+    @if (!auth.loading() && !auth.me()) {
+      <a routerLink="/auth"> login </a>
+    }
     <button class="btn">+</button>
     <!-- <button class="btn btn-square btn-ghost">
       <svg
